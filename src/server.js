@@ -1,17 +1,30 @@
 import express from 'express'
 import dotenv from 'dotenv'
-
-
+import { sequelize } from './service/db.js'
 dotenv.config()
 
 let app = express()
 let PORT = process.env.PORT ?? 8080
 
-import profileRoute  from './route/profile.route.js'
-import blogRoute from "./route/blog.route.js"
+import profileRoute  from './routes/profile.route.js'
+import blogRoute from "./routes/blog.route.js"
 
-app.use(profileRoute)
-app.use(blogRoute)
+(async () => {
+    try {
+        app.use(express.json())
+        app.use(profileRoute)
+        app.use(blogRoute)
+
+        await sequelize.authenticate();
+        console.log('Database connected successfully!');
+
+
+    } catch (error) {
+        console.error('Error connecting to the database:', error);
+    }
+})();
+
+
 
 
 app.listen(PORT, () => console.log("This server is running on http://localhost:" + PORT))

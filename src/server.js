@@ -12,11 +12,13 @@ import blogRoute from "./routes/blog.route.js"
 (async () => {
     try {
         app.use(express.json())
-        app.use(profileRoute)
-        app.use(blogRoute)
-
+        
         await sequelize.authenticate();
         console.log('Database connected successfully!');
+
+        
+        app.use(profileRoute)
+        app.use(blogRoute)
 
 
     } catch (error) {

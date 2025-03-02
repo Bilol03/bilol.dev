@@ -1,7 +1,7 @@
 import { sequelize } from "./db.js";
 import { DataTypes } from "sequelize"
 
-const Blog = sequelize.define('Blog', {
+const Blog = sequelize.define('blogs', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -24,7 +24,7 @@ const Blog = sequelize.define('Blog', {
         timestamps: true, // Automatically adds `createdAt` and `updatedAt`
   });
   
-// sequelize.sync( {alter: false });
+sequelize.sync( {alter: false });
 
 export {
     Blog

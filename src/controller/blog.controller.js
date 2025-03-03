@@ -12,10 +12,17 @@ let getDate = () => {
 
 
 let getBlogs = async(req, res) => {
-    console.log(await Blog);
-    
     let datas = await Blog.findAll()
+    
     res.status(200).json(await datas)
+}
+
+
+let getBlogById = async (req, res) => {
+    let data = await Blog.findOne({ where: {id: +req.params.id } })
+    if(!data) return res.status(404).json( { status: 404, message: "User not found!" } )
+    
+    res.status( 200 ).json( { status: 200, message: "Success", data: data } )
 }
 
 let postBlogs = async(req, res) => {
@@ -51,10 +58,12 @@ let deleteBlog = async (req, res) => {
 }
 
 
+
 export {
     getBlogs,
     postBlogs,
     updateBlog,
-    deleteBlog
+    deleteBlog,
+    getBlogById
 
 }

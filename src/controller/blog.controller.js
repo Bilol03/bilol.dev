@@ -1,5 +1,5 @@
 import { where } from "sequelize";
-import { Blog } from "../service/blog.service.js"
+import { Blog } from "../model/blog.model.js"
 
 let getDate = () => {
     const date = new Date(); // Month is zero-based, so 10 = November
